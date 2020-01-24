@@ -1,0 +1,18 @@
+﻿:28367 PAINT PROTOCOL
+
+SERVER
+<-	GMAP
+		맵 정보 조라
+	->	MAP0000400004142586379AB7CFED
+		   widthHightData...
+		3  10        w*h
+
+<-	STLE0000300000D
+	    xaxisYaxisT
+		타일 설치함
+	->	TLEOK
+	->	TLEER0001
+
+->	STLE0000300000D
+	    xaxisYaxisT
+		타일 설치됨
