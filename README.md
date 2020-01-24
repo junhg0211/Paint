@@ -9,6 +9,8 @@ and when you go to left side, your x-coordinate will decreased.
 As the same way, going down makes your y-coordinate be increased,
 going up does your y-coordinate decreased.
 
+![제목 없음](https://user-images.githubusercontent.com/29883701/73036650-89b7f000-3e8f-11ea-989b-784614c0a578.png)
+
 ## Protocol
 * 'CTS' stands for 'Clients to Server'. Protocol header with this label is for sending information from client to a server.
 * 'STC' stands for 'Server to Clients'. Protocol header with this label is for sending information from a server to client.
