@@ -122,7 +122,7 @@ window.addEventListener("mouseup", (event) => {
 });
 
 window.addEventListener("wheel", (event) => {
-    camera.targetZoom -= event.deltaY / 20;
+    camera.targetZoom = Math.max(camera.targetZoom - event.deltaY / 20, MINIMUM_SCALE);
 });
 
 window.addEventListener("resize", (event) => {

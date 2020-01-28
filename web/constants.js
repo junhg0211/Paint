@@ -119,22 +119,22 @@ if (typeof KeyEvent == "undefined") {
 }
 
 const Color = {
-    WHITE: "#FFFFFF",
-    LIGHT_GRAY: "#AAAAAA",
-    GRAY: "#555555",
-    BLACK: "#000000",
-    RED: "#FF0000",
-    ORANGE: "#FF8800",
-    YELLOW: "#FFFF00",
-    LIME: "#88FF00",
-    GREEN: "#00FF00",
-    HATSUNE_MIKU: "#00FF88",
-    AQUA: "#00FFFF",
-    SKY: "#0088FF",
-    BLUE: "#0000FF",
-    PURPLE: "#8800FF",
-    MAGENTA: "#FF00FF",
-    PINK: "#FF0088",
+    WHITE: "#FDFDFD",
+    LIGHT_GRAY: "#DEDEDE",
+    GRAY: "#888888",
+    BLACK: "#232323",
+    PINK: "#FEB0D1",
+    RED: "#F81501",
+    ORANGE: "#EC9101",
+    BROWN: "#A66B41",
+    VANILLA: "#FDDE59",
+    LIGHT_GREEN: "#8FCC3F",
+    GREEN: "#029D03",
+    AQUA_BLUE: "#01BDDF",
+    GREEN_BLUE: "#0179CB",
+    BLUE: "#000EF0",
+    VIOLET: "#D57DE5",
+    PURPLE: "#8B1384",
 };
 
 const COLOR_CODE = [
@@ -142,18 +142,18 @@ const COLOR_CODE = [
     Color.LIGHT_GRAY,
     Color.GRAY,
     Color.BLACK,
+    Color.PINK,
     Color.RED,
     Color.ORANGE,
-    Color.YELLOW,
-    Color.LIME,
+    Color.BROWN,
+    Color.VANILLA,
+    Color.LIGHT_GREEN,
     Color.GREEN,
-    Color.HATSUNE_MIKU,
-    Color.AQUA,
-    Color.SKY,
+    Color.AQUA_BLUE,
+    Color.GREEN_BLUE,
     Color.BLUE,
-    Color.PURPLE,
-    Color.MAGENTA,
-    Color.PINK
+    Color.VIOLET,
+    Color.PURPLE
 ];
 
 const fps = 60;
@@ -163,3 +163,5 @@ function pad(n, width) {
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
+
+const MINIMUM_SCALE = 0.5;

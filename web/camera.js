@@ -8,7 +8,7 @@ function Camera(zoom) {
     this.y = this.targetY;
     this.zoom = this.targetZoom;
 
-    this.speed = 10;  // speed * zoom / fps
+    this.speed = 300;  // speed * zoom / fps
     
     this.getCanvasX = function(plotX) {
         return canvasWidth / 2 + (plotX - this.x) * this.zoom;
@@ -33,17 +33,17 @@ function Camera(zoom) {
 
     this.tick = function() {
         if (keys[KeyEvent.K_W]) {
-            this.targetY -= this.speed / fps;
+            this.targetY -= this.speed / fps / this.zoom;
         } if (keys[KeyEvent.K_A]) {
-            this.targetX -= this.speed / fps;
+            this.targetX -= this.speed / fps / this.zoom;
         } if (keys[KeyEvent.K_S]) {
-            this.targetY += this.speed / fps;
+            this.targetY += this.speed / fps / this.zoom;
         } if (keys[KeyEvent.K_D]) {
-            this.targetX += this.speed / fps;
+            this.targetX += this.speed / fps / this.zoom;
         } if (keys[KeyEvent.K_SPACE]) {
             this.targetZoom -= this.targetZoom / fps * 2;
-            if (this.targetZoom < 1) {
-                this.targetZoom = 1;
+            if (this.targetZoom < MINIMUM_SCALE) {
+                this.targetZoom = MINIMUM_SCALE;
             }
         } if (keys[KeyEvent.K_SHIFT]) {
             this.targetZoom += this.targetZoom / fps * 2;

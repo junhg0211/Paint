@@ -20,6 +20,8 @@ function Connector() {
     this.socket.onmessage = function(event) {
         var message = event.data;
 
+        console.log(message);
+
         if (message.substring(0, 3) == "MAP") {
             var width = parseInt(message.substring(3, 8));
             var height = parseInt(message.substring(8, 13));
@@ -41,6 +43,6 @@ function Connector() {
     };
 
     this.socket.onclose = function() {
-        console.log("Console Closed");
+        alert("서버가 열려있지 않거나, 종료되었습니다.\nYour server is not opened or terminated.");
     };
 }

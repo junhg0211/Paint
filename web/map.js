@@ -10,8 +10,13 @@ function Map(width, height, initialValue) {
         }
     }
 
+    this.mapCanvas = document.createElement('canvas');
+    this.mapCanvasContext = this.mapCanvas.getContext('2d');
+
     this.setTile = function(x, y, tileCode) {
         this.map[y][x] = tileCode;
+        this.mapCanvasContext.fillStyle = COLOR_CODE[tileCode];
+        this.mapCanvasContext.fillRect(x, y, 1, 1);
     };
 
     this.setHeight = function(height) {
@@ -30,6 +35,7 @@ function Map(width, height, initialValue) {
         }
 
         this.height = height;
+        this.mapCanvas.height = height;
     };
 
     this.setWidth = function(width) {
@@ -44,6 +50,7 @@ function Map(width, height, initialValue) {
         }
 
         this.width = width;
+        this.mapCanvas.width = width;
     };
 
     this.fill = function(color) {
@@ -69,21 +76,27 @@ function Map(width, height, initialValue) {
     };
 
     this.render = function(context, camera) {
-        var canvasX;
-        var canvasY;
-        for (var y = 0; y < this.height; y++) {
-            for (var x = 0; x < this.width; x++) {
-                canvasX = camera.getCanvasX(x);
-                canvasY = camera.getCanvasY(y);
+        // // old-school type map rendering
+        // var canvasX;
+        // var canvasY;
+        // for (var y = 0; y < this.height; y++) {
+        //     for (var x = 0; x < this.width; x++) {
+        //         canvasX = camera.getCanvasX(x);
+        //         canvasY = camera.getCanvasY(y);
 
-                if (canvasX + camera.zoom >= 0 && canvasY + camera.zoom >= 0) {
-                    if (canvasX < canvasWidth && canvasY < canvasHeight) {
-                        context.fillStyle = COLOR_CODE[this.map[y][x]];
-                        context.fillRect(canvasX, canvasY, camera.zoom, camera.zoom);
-                    }
-                }
-            }
-        }
+        //         if (canvasX + camera.zoom >= 0 && canvasY + camera.zoom >= 0) {
+        //             if (canvasX < canvasWidth && canvasY < canvasHeight) {
+        //                 context.fillStyle = COLOR_CODE[this.map[y][x]];
+        //                 context.fillRect(canvasX, canvasY, camera.zoom, camera.zoom);
+        //             }
+        //         }
+        //     }
+        // }
+
+        context.scale(camera.zoom, camera.zoom);
+        context.imageSmoothingEnabled = false;
+        context.drawImage(this.mapCanvas, camera.getCanvasX(0) / camera.zoom, camera.getCanvasY(0) / camera.zoom);
+        context.scale(1/camera.zoom, 1/camera.zoom);
 
         var startY = camera.getCanvasY(0);
 
@@ -91,19 +104,19 @@ function Map(width, height, initialValue) {
         var endX = Math.min(camera.getCanvasX(this.width), canvasWidth);
         // upper border
         if (startY >= 0) {
-            ctx.beginPath();
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(endX, startY);
-            ctx.stroke();
+            context.beginPath();
+            context.moveTo(startX, startY);
+            context.lineTo(endX, startY);
+            context.stroke();
         }
 
         var endY = camera.getCanvasY(this.height);
         // lower border
         if (startY < canvasHeight) {
-            ctx.beginPath();
-            ctx.moveTo(startX, endY);
-            ctx.lineTo(endX, endY);
-            ctx.stroke();
+            context.beginPath();
+            context.moveTo(startX, endY);
+            context.lineTo(endX, endY);
+            context.stroke();
         }
 
         startY = Math.max(startY, 0);
@@ -112,18 +125,18 @@ function Map(width, height, initialValue) {
         // left border
         if (camera.getCanvasX(0) >= 0) {
 
-            ctx.beginPath();
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(startX, endY);
-            ctx.stroke();
+            context.beginPath();
+            context.moveTo(startX, startY);
+            context.lineTo(startX, endY);
+            context.stroke();
         }
 
         // right border
         if (camera.getCanvasX(this.width) < canvasWidth) {
-            ctx.beginPath();
-            ctx.moveTo(endX, startY);
-            ctx.lineTo(endX, endY);
-            ctx.stroke();
+            context.beginPath();
+            context.moveTo(endX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
         }
     };
 }
