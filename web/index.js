@@ -74,13 +74,6 @@ function render() {
 
     hotBar.render(ctx);
 
-    // cursor
-    ctx.beginPath();
-    ctx.arc(mouseX, mouseY, 3, 0, Math.PI * 2, false);
-    ctx.lineWidth = 1;
-    ctx.drawStyle = Color.BLACK;
-    ctx.stroke();
-
     // crosshair
     ctx.drawStyle = Color.BLACK;
     ctx.beginPath();
