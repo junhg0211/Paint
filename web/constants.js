@@ -165,3 +165,6 @@ function pad(n, width) {
 }
 
 const MINIMUM_SCALE = 0.5;
+
+const HOTBAR_KEYS = '`12345QERTFGZXCV';
+const HOTBAR_KEYS_BLACKS = '`124RC'

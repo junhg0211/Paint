@@ -68,6 +68,12 @@ function HotBar() {
 
             context.fillStyle = COLOR_CODE[i];
             context.fillRect(x + margin + this.size * i, y, this.size, this.size);
+
+            context.fillStyle = Color.WHITE;
+            if (HOTBAR_KEYS_BLACKS.includes(HOTBAR_KEYS[i])) {
+                context.fillStyle = Color.BLACK;
+            }
+            context.fillText(HOTBAR_KEYS[i], x + margin + this.size * i + 3, canvasHeight - 3);
         }
 
         x = x + margin + this.size * this.selected;

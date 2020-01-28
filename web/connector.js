@@ -20,8 +20,6 @@ function Connector() {
     this.socket.onmessage = function(event) {
         var message = event.data;
 
-        console.log(message);
-
         if (message.substring(0, 3) == "MAP") {
             var width = parseInt(message.substring(3, 8));
             var height = parseInt(message.substring(8, 13));
@@ -34,6 +32,7 @@ function Connector() {
                 for (var x = 0; x < width; x++) {
                     map.setTile(x, y, parseInt(message[13 + y * width + x], 16));
                 }
+                // console.log((y * height + x) / (width * height));
             }
         } else if (message.substring(0, 4) == "STLE") {
             var x = parseInt(message.substring(4, 9));
