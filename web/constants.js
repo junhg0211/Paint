@@ -168,3 +168,7 @@ const MINIMUM_SCALE = 0.5;
 
 const HOTBAR_KEYS = '`12345QERTFGZXCV';
 const HOTBAR_KEYS_BLACKS = '`124RC'
+
+function getColorCode(data) {
+    return ('#' + data[0].toString(16) + data[1].toString(16) + data[2].toString(16)).toUpperCase();
+}

@@ -27,8 +27,8 @@ function Camera(zoom) {
     }
 
     this.center = function() {
-        this.targetX = map.width / 2;
-        this.targetY = map.height / 2;
+        this.targetX = map.mapCanvas.width / 2;
+        this.targetY = map.mapCanvas.height / 2;
     }
 
     this.tick = function() {
