@@ -46,7 +46,7 @@ function Map(width, height, initialValue) {
         var startY = camera.getCanvasY(0);
 
         var startX = Math.max(camera.getCanvasX(0), 0);
-        var endX = Math.min(camera.getCanvasX(this.width), canvasWidth);
+        var endX = Math.min(camera.getCanvasX(this.mapCanvas.width), canvasWidth);
         // upper border
         if (startY >= 0) {
             context.beginPath();
@@ -55,7 +55,7 @@ function Map(width, height, initialValue) {
             context.stroke();
         }
 
-        var endY = camera.getCanvasY(this.height);
+        var endY = camera.getCanvasY(this.mapCanvas.height);
         // lower border
         if (startY < canvasHeight) {
             context.beginPath();
@@ -77,7 +77,7 @@ function Map(width, height, initialValue) {
         }
 
         // right border
-        if (camera.getCanvasX(this.width) < canvasWidth) {
+        if (camera.getCanvasX(this.mapCanvas.width) < canvasWidth) {
             context.beginPath();
             context.moveTo(endX, startY);
             context.lineTo(endX, endY);
