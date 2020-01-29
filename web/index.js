@@ -21,6 +21,8 @@ var hotBar;
 
 var connector;
 
+var uiVisible = true;
+
 (function setup() {
     canvasWidth = window.innerWidth;
     canvasHeight = window.innerHeight;
@@ -67,23 +69,25 @@ function render() {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     
     map.render(ctx, camera);
+    
+    if (uiVisible) {
+        // selection block
+        ctx.drawStyle = Color.BLACK;
+        ctx.strokeRect(camera.getCanvasX(Math.floor(plotX)), camera.getCanvasY(Math.floor(plotY)), camera.zoom, camera.zoom);
 
-    // selection block
-    ctx.drawStyle = Color.BLACK;
-    ctx.strokeRect(camera.getCanvasX(Math.floor(plotX)), camera.getCanvasY(Math.floor(plotY)), camera.zoom, camera.zoom);
+        hotBar.render(ctx);
 
-    hotBar.render(ctx);
-
-    // crosshair
-    ctx.drawStyle = Color.BLACK;
-    ctx.beginPath();
-    ctx.moveTo(canvasWidth / 2 - 10, canvasHeight / 2);
-    ctx.lineTo(canvasWidth / 2 + 10, canvasHeight / 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(canvasWidth / 2, canvasHeight / 2 - 10);
-    ctx.lineTo(canvasWidth / 2, canvasHeight / 2 + 10);
-    ctx.stroke();
+        // crosshair
+        ctx.drawStyle = Color.BLACK;
+        ctx.beginPath();
+        ctx.moveTo(canvasWidth / 2 - 10, canvasHeight / 2);
+        ctx.lineTo(canvasWidth / 2 + 10, canvasHeight / 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(canvasWidth / 2, canvasHeight / 2 - 10);
+        ctx.lineTo(canvasWidth / 2, canvasHeight / 2 + 10);
+        ctx.stroke();
+    }
 
     if (hud) {
         ctx.fillStyle = Color.BLACK;
@@ -95,6 +99,10 @@ function render() {
 
 window.addEventListener("keydown", (event) => {
     keys[event.keyCode] = true;
+
+    if (keys[KeyEvent.K_B]) {
+        uiVisible = !uiVisible;
+    }
 });
 
 window.addEventListener("keyup", (event) => {
