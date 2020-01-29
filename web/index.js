@@ -102,6 +102,8 @@ window.addEventListener("keydown", (event) => {
 
     if (keys[KeyEvent.K_B]) {
         uiVisible = !uiVisible;
+    } else if (keys[KeyEvent.K_H]) {
+        hud = !hud;
     }
 });
 
