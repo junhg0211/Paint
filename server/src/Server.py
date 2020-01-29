@@ -1,5 +1,6 @@
 import asyncio
 import websockets
+from websockets import ConnectionClosed
 
 
 class Server:
@@ -17,22 +18,25 @@ class Server:
     async def handler(self, websocket, path):
         self.clients.add(websocket)
 
-        async for message in websocket:
-            print('>', message)
-            if message[:4] == 'GMAP':
-                data = ''
-                for y in range(len(self.board)):
-                    for x in range(len(self.board[y])):
-                        data += hex(self.board[y][x])[2:]
-                await websocket.send(f'MAP{self.width:05d}{self.height:05d}{data}')
+        try:
+            async for message in websocket:
+                print('>', message)
+                if message[:4] == 'GMAP':
+                    data = ''
+                    for y in range(len(self.board)):
+                        for x in range(len(self.board[y])):
+                            data += hex(self.board[y][x])[2:]
+                    await websocket.send(f'MAP{self.width:05d}{self.height:05d}{data}')
 
-            elif message[:4] == 'STLE':
-                x = int(message[4:9])
-                y = int(message[9:14])
-                tile_code = int(message[14], 16)
-                self.board[y][x] = tile_code
+                elif message[:4] == 'STLE':
+                    x = int(message[4:9])
+                    y = int(message[9:14])
+                    tile_code = int(message[14], 16)
+                    self.board[y][x] = tile_code
 
-                await self.broadcast(message)
+                    await self.broadcast(message)
+        except ConnectionClosed:
+            pass
 
         self.clients.remove(websocket)
 
