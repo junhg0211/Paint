@@ -1,5 +1,5 @@
 # Paint
-like a *r/place*.
+like *r/place*.
 
 ## Coordinate System
 *Paint* use a coordinate system that exists in default javascript canvas context.
