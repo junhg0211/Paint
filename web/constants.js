@@ -170,5 +170,9 @@ const HOTBAR_KEYS = '`12345QERTFGZXCV';
 const HOTBAR_KEYS_BLACKS = '`124RC'
 
 function getColorCode(data) {
-    return ('#' + data[0].toString(16) + data[1].toString(16) + data[2].toString(16)).toUpperCase();
+    var red = data[0].toString(16)
+      , green = data[1].toString(16)
+      , blue = data[2].toString(16);
+    return ('#' + ('0' + red).substring(red.length - 1, red.length + 1) + ('0' + green).substring(green.length - 1, green.length + 1)
+                + ('0' + blue).substring(blue.length - 1, blue.length + 1) ).toUpperCase();
 }

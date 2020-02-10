@@ -202,3 +202,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 src/__pycache__/*.pyc
+/portfolio
