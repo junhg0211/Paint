@@ -1,9 +1,15 @@
-function Connector() {
+function Connector(destination) {
     if (!("WebSocket" in window)) {
         alert("This browser is not supported in internet socket communication.\n브라우저에서 인터넷 통신을 사용할 수 없습니다.")
     }
 
-    this.socket = new WebSocket("ws://shtelo.iptime.org:28367");
+    this.unable = false;
+
+    try {
+        this.socket = new WebSocket(`ws://${destination}`);
+    } catch(e) {
+        this.unable = true;
+    }
     
     this.gmap = function() {
         this.socket.send("GMAP");
@@ -43,5 +49,6 @@ function Connector() {
 
     this.socket.onclose = function() {
         alert("서버가 열려있지 않거나, 종료되었습니다.\nYour server is not opened or terminated.");
+        this.unable = true;
     };
 }

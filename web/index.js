@@ -37,7 +37,7 @@ var uiVisible = true;
         buttons.push(false);
     }
 
-    connector = new Connector();
+    connector = new Connector(prompt('연결할 서버 주소를 입력해주세요. 기본 포트는 28367입니다.\n(형태: "<host>:<port>")'));
 
     camera = new Camera(16);
     map = new Map(1, 1, 0);
